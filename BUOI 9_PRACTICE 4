@@ -1,1 +1,53 @@
+--CAU 1
+SELECT
+sum(CASE
+  when device_type='laptop' then 1 else 0
+end) as laptop_views,
+sum(CASE
+  when device_type in ('tablet', 'phone') then 1 else 0
+end) as mobile_views
+FROM viewership
+group by laptop_views, mobile_views
 
+
+--CAU 2
+select *,
+case
+    when (x+y)>z and (x+z)>y and (y+z)>x then 'Yes'
+    else 'No'
+end as 'triangle'
+from Triangle
+
+
+--CAU 4
+CACH 1: 
+select name from Customer
+where referee_id!=2 or referee_id is null
+CACH 2:
+select name
+from Customer
+where (case
+    when referee_id is null or referee_id!=2 then 0
+end) is not null
+
+--CAU 3
+select
+round(sum(case
+  when call_category in ('n/a',' ') then 1
+end)/sum(cast(call_category as int))*100,1) as call_percentage
+from callers
+
+
+--CAU 5
+select survived,
+sum(case
+when pclass=1 then 1 else 0
+end) as first_class,
+sum(case
+when pclass=2 then 1 else 0
+end) as second_class,
+sum(case
+when pclass=3 then 1 else 0
+end) as third_class
+from titanic
+group by survived
