@@ -1,1 +1,13 @@
 
+
+
+
+
+
+--CAU 7
+SELECT a_page.page_id
+from pages as a_page
+left join page_likes as b_likes
+on a_page.page_id=b_likes.page_id
+where liked_date is NULL
+order by a_page.page_id
